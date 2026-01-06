@@ -43,7 +43,7 @@ const getServiceIcon = (iconType: string, category: string): LucideIcon => {
     if (category && category.includes('移動')) return Bike;
     if (category && (category.includes('用品') || category.includes('買い物'))) return ShoppingCart;
     if (category && (category.includes('相談') || category.includes('手続き'))) return Info;
-    if (category === 'その他') return MoreHorizontal;
+    if (category === 'その他') return Layers;
     return Info;
 };
 
