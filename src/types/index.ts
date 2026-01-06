@@ -19,6 +19,7 @@ export type Service = {
     category: string;
     image: string; // URL
     iconType: string;
+    priority: number; // For sorting
     solutionIds: string[];
     tags: string[]; // Generated from category + solution->need->tag
 };

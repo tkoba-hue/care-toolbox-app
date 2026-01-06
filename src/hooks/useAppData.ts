@@ -32,6 +32,8 @@ export const useAppData = () => {
                 ]);
 
                 const servicesData = sSnap.docs.map(change => change.data() as Service);
+                // Sort by priority (top ones first)
+                servicesData.sort((a, b) => (b.priority || 0) - (a.priority || 0));
 
                 const needsData: Record<string, Need> = {};
                 nSnap.docs.forEach(doc => {
