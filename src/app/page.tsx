@@ -42,6 +42,7 @@ export default function Home() {
 
             // Combine: Priority first, then shuffled normal
             setShuffledServices([...priorityItems, ...shuffledNormal]);
+            setCurrentCardIndex(0); // Ensure we start from the FIRST card (index 0)
         }
     }, [services]);
 
