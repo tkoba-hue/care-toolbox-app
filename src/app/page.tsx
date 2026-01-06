@@ -33,8 +33,15 @@ export default function Home() {
 
     useEffect(() => {
         if (services.length > 0) {
-            const shuffled = [...services].sort(() => 0.5 - Math.random());
-            setShuffledServices(shuffled);
+            // Separate priority items from normal items
+            const priorityItems = services.filter(s => (s.priority || 0) > 0).sort((a, b) => (b.priority || 0) - (a.priority || 0));
+            const normalItems = services.filter(s => !(s.priority || 0) || s.priority <= 0);
+
+            // Shuffle normal items
+            const shuffledNormal = [...normalItems].sort(() => 0.5 - Math.random());
+
+            // Combine: Priority first, then shuffled normal
+            setShuffledServices([...priorityItems, ...shuffledNormal]);
         }
     }, [services]);
 
