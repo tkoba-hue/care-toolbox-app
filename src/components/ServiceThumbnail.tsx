@@ -71,8 +71,11 @@ export const ServiceThumbnail: React.FC<ServiceThumbnailProps> = ({ src, iconTyp
         );
     }
     return (
-        <div className={`${className} flex items-center justify-center bg-slate-100`}>
-            <IconComp strokeWidth={1.5} className="w-1/2 h-1/2 text-slate-400" />
+        <div className={`${className} flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-200`}>
+            <div className="flex flex-col items-center gap-1 opacity-40">
+                <IconComp strokeWidth={1.2} className="w-10 h-10 text-slate-500" />
+                <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">{category || 'Service'}</span>
+            </div>
         </div>
     );
 };
