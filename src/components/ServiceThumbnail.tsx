@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import {
     Bot, Bird, Utensils, Layers, MonitorPlay, Sprout, Bike, Camera, Palette, Armchair,
     Footprints, Ear, Pill, MessageCircle, Eye, Bell, Activity, Shirt, Home, Smile,
-    User, Coffee, Scissors, Shield, Info, ShoppingCart, MoreHorizontal, LucideIcon
+    User, Coffee, Scissors, Shield, Info, ShoppingCart, MoreHorizontal, LucideIcon, Heart
 } from 'lucide-react';
 
 const getServiceIcon = (iconType: string, category: string): LucideIcon => {
@@ -25,21 +25,24 @@ const getServiceIcon = (iconType: string, category: string): LucideIcon => {
         case 'Coffee': return Coffee;
         case 'Scissors': return Scissors;
         case 'Shield': return Shield;
+        case 'MessageCircle': return MessageCircle;
+        case 'Heart': return Heart; // Added
+        case 'Home': return Home; // Added
+        case 'ShoppingCart': return ShoppingCart; // Added
         default: break;
     }
     if (category && category.includes('コミュニケーション')) return MessageCircle;
     if (category && category.includes('見守り')) return Eye;
-    if (category && category.includes('緊急')) return Bell;
-    if (category && category.includes('身体')) return Activity;
+    if (category && (category.includes('緊急') || category.includes('安全'))) return Bell;
+    if (category && (category.includes('身体') || category.includes('健康'))) return Activity;
     if (category && category.includes('食事')) return Utensils;
-    if (category && category.includes('健康')) return Activity;
     if (category && category.includes('認知症')) return Smile;
     if (category && category.includes('衣類')) return Shirt;
-    if (category && category.includes('生活')) return Home;
-    if (category && category.includes('住環境')) return Home;
+    if (category && (category.includes('生活') || category.includes('住環境'))) return Home;
     if (category && category.includes('趣味')) return Smile;
-    if (category && category.includes('移動')) return Footprints;
-    if (category && category.includes('日用品')) return ShoppingCart;
+    if (category && category.includes('移動')) return Bike;
+    if (category && (category.includes('用品') || category.includes('買い物'))) return ShoppingCart;
+    if (category && (category.includes('相談') || category.includes('手続き'))) return Info;
     if (category === 'その他') return MoreHorizontal;
     return Info;
 };
