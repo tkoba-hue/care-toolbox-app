@@ -63,7 +63,22 @@ export default function Home() {
 
     const getTopNeeds = (scores: Record<string, number>) => {
         const sortedNeedIds = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
-        return sortedNeedIds.slice(0, 3).map(id => needs[id]).filter(Boolean);
+        let topNeeds = sortedNeedIds.slice(0, 3).map(id => needs[id]).filter(Boolean);
+
+        // Guarantee 3 hints by padding with random needs from the last swiped service's category if necessary
+        if (topNeeds.length < 3) {
+            const lastService = shuffledServices[currentCardIndex];
+            const allNeedsArr = Object.values(needs);
+            const categoryNeeds = allNeedsArr.filter(n => n.category === lastService?.category && !topNeeds.some(tn => tn.id === n.id));
+            const genericNeeds = allNeedsArr.filter(n => !topNeeds.some(tn => tn.id === n.id));
+
+            const pool = [...categoryNeeds, ...genericNeeds];
+            while (topNeeds.length < 3 && pool.length > 0) {
+                const idx = Math.floor(Math.random() * pool.length);
+                topNeeds.push(pool.splice(idx, 1)[0]);
+            }
+        }
+        return topNeeds.slice(0, 3);
     };
 
     // Guard for loading
